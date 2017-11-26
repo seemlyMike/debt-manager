@@ -41,7 +41,6 @@
             <version>0.23.0</version>
         </dependency>
 
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -72,25 +71,7 @@
                             <alias>${project.artifactId}</alias>
                             <build>
                                 <dockerFileDir>${project.basedir}</dockerFileDir>
-
                             </build>
-                            <run>
-                                <namingStrategy>alias</namingStrategy>
-                                <dependsOn>
-                                    <container>mongo</container>
-                                </dependsOn>
-                                <links>
-                                    <link>mongo</link>
-                                </links>
-                                <ports>
-                                    <port>9876:8080</port>
-                                </ports>
-                                <log>
-                                    <prefix>TC</prefix>
-                                    <date>default</date>
-                                    <color>cyan</color>
-                                </log>
-                            </run>
                         </image>
                     </images>
                     <authConfig>
@@ -99,23 +80,15 @@
                     </authConfig>
                 </configuration>
                 <executions>
-                    <execution>
-                        <id>start</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>stop</goal>
-                            <goal>build</goal>
-                            <goal>start</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>push</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>stop</goal>
-                            <goal>push</goal>
-                        </goals>
-                    </execution>
+                    <!-- Uncommment this execution phase if you wan to push image to repository -->
+                    <!--<execution>-->
+                    <!--<id>push</id>-->
+                    <!--<phase>post-integration-test</phase>-->
+                    <!--<goals>-->
+                    <!--<goal>stop</goal>-->
+                    <!--<goal>push</goal>-->
+                    <!--</goals>-->
+                    <!--</execution>-->
                     <!-- Uncommment this execution phase if you wan to remove container after testing -->
                     <!-- <execution
                     <id>clean image</id>
