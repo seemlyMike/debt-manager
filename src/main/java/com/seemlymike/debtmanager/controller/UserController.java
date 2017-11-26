@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.*;
 
 @Component
 @RestController
+@RequestMapping(value = "/users")
 public class UserController {
 
     @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping(value = "/users", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public User create(@RequestBody User user) {
         return userRepository.save(user);
     }
